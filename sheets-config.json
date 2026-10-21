@@ -1,0 +1,139 @@
+{
+  "endpoint": "https://script.google.com/macros/s/AKfycbypNC0v5IbzoKgE0viSLPFlNxqy7TK2w_y7MBye9-bkqpa91k31EORwimyi_XWAFbs/exec",
+  "sheet": "Results",
+  "events": {
+    "consent": "Student entered name, email and school or organization, agreed to data collection, and began the game",
+    "attempt": "A run in a domain or trial was recorded (up to 3 per world)",
+    "final": "Student chose which attempt counts as final for a world"
+  },
+  "columns": [
+    {
+      "key": "received_at",
+      "label": "Time received by Google (UTC)"
+    },
+    {
+      "key": "timestamp",
+      "label": "Time of event on student's device (UTC)"
+    },
+    {
+      "key": "event",
+      "label": "consent | attempt | final"
+    },
+    {
+      "key": "name",
+      "label": "Student name"
+    },
+    {
+      "key": "email",
+      "label": "Student email"
+    },
+    {
+      "key": "organization",
+      "label": "School or organization entered by student"
+    },
+    {
+      "key": "consent_at",
+      "label": "When consent was given (UTC)"
+    },
+    {
+      "key": "device_id",
+      "label": "Random ID for this browser; a change means a different device or browser"
+    },
+    {
+      "key": "world_id",
+      "label": "origins | mirrors | labyrinth | abyss | shore | tower | grid | cat"
+    },
+    {
+      "key": "world",
+      "label": "Domain or trial name"
+    },
+    {
+      "key": "attempt",
+      "label": "Attempt number (1-3)"
+    },
+    {
+      "key": "is_final",
+      "label": "yes if this row marks the final attempt"
+    },
+    {
+      "key": "score",
+      "label": "Points"
+    },
+    {
+      "key": "correct",
+      "label": "Questions answered correctly"
+    },
+    {
+      "key": "answered",
+      "label": "Questions answered"
+    },
+    {
+      "key": "percent",
+      "label": "Percent correct (one decimal)"
+    },
+    {
+      "key": "level",
+      "label": "Level 3 (83-100), Level 2 (71.1-82.9), Level 1 (60.5-71), Below Level 1 (0-60.4)"
+    },
+    {
+      "key": "completed",
+      "label": "yes if the guardian or trial was defeated"
+    },
+    {
+      "key": "best_combo",
+      "label": "Longest streak of correct answers"
+    },
+    {
+      "key": "missed",
+      "label": "Number of missed items in the attempt"
+    },
+    {
+      "key": "overall_percent",
+      "label": "Overall percent across all worlds and trials"
+    },
+    {
+      "key": "overall_level",
+      "label": "Overall proficiency level"
+    },
+    {
+      "key": "cat_ability",
+      "label": "Adaptive Oracle ability estimate in logits (passing standard 0.00)"
+    },
+    {
+      "key": "cat_se",
+      "label": "Adaptive Oracle standard error"
+    },
+    {
+      "key": "cat_result",
+      "label": "Adaptive Oracle result: pass, fail or incomplete"
+    },
+    {
+      "key": "cat_exam",
+      "label": "Adaptive Oracle exam taken: NCLEX-RN (passing standard 0.00) or NCLEX-PN (-0.18)"
+    },
+    {
+      "key": "started_at",
+      "label": "Attempt start date and time, with time zone"
+    },
+    {
+      "key": "submitted_at",
+      "label": "Attempt submission date and time, with time zone"
+    },
+    {
+      "key": "duration",
+      "label": "Active playing time (hh:mm:ss)"
+    },
+    {
+      "key": "time_zone",
+      "label": "Student device time zone (IANA, e.g., America/New_York)"
+    },
+    {
+      "key": "verification",
+      "label": "Verification code printed on the student's report"
+    },
+    {
+      "key": "user_agent",
+      "label": "Browser and device description"
+    }
+  ]
+}
