@@ -351,6 +351,16 @@ html.calm .hypno .hy-spin{animation:none}
 @keyframes pdust{0%{transform:translateY(0);opacity:0}10%{opacity:.9}90%{opacity:.6}100%{transform:translateY(-105vh) translateX(30px);opacity:0}}
 .cine.has-poster .cine-body{position:absolute;left:0;right:0;bottom:0;padding:22vh max(16px,env(safe-area-inset-right,0px)) calc(28px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:linear-gradient(to top,rgba(5,4,11,.95) 0%,rgba(5,4,11,.82) 45%,rgba(5,4,11,0) 100%);z-index:2}
 .cine.has-poster{justify-content:flex-end}
+.sgate{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;padding:24px max(16px,env(safe-area-inset-left,0px));background:radial-gradient(ellipse at 50% 40%,rgba(40,24,90,.55),rgba(5,4,11,.92) 70%);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:opacity .6s ease}
+.sgate.out{opacity:0;pointer-events:none}
+.sgate .sg-in{display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center;max-width:560px}
+.sgate h2{margin:0;font-family:var(--f-display);font-size:clamp(30px,7vw,54px);line-height:1.15;padding:.1em 0;color:#f3d58e;text-shadow:0 0 24px rgba(243,213,142,.45)}
+.sgate p{margin:0;font-size:clamp(17px,2.6vw,20px);color:var(--mist,#c8c3e0)}
+.sg-go{font-family:var(--f-mono);font-size:clamp(17px,2.8vw,21px);letter-spacing:.2em;text-transform:uppercase;color:#05040b;background:linear-gradient(90deg,#7ff0d0,#c9b3ff,#f3d58e);border:0;border-radius:999px;padding:18px 38px;cursor:pointer;box-shadow:0 0 0 1px rgba(255,255,255,.35),0 0 36px rgba(127,240,208,.45);animation:sgpulse 2.4s ease-in-out infinite}
+.sg-go:focus-visible{outline:3px solid #fff;outline-offset:4px}
+@keyframes sgpulse{0%,100%{box-shadow:0 0 0 1px rgba(255,255,255,.35),0 0 24px rgba(127,240,208,.35)}50%{box-shadow:0 0 0 1px rgba(255,255,255,.5),0 0 54px rgba(201,179,255,.7)}}
+.sg-quiet{font:inherit;font-size:16px;color:var(--mist,#c8c3e0);background:none;border:0;text-decoration:underline;text-underline-offset:4px;cursor:pointer;padding:8px}
+@media (prefers-reduced-motion:reduce){.sg-go{animation:none}}
 .runtime{display:flex;flex-wrap:wrap;gap:6px 22px;margin:0;font-family:var(--f-mono);font-size:15px;color:var(--mist)}.runtime b{color:#7ff0d0;font-weight:500;letter-spacing:.12em;text-transform:uppercase;font-size:12.5px;margin-right:6px}
 /* Adaptive Oracle poster effects */
 .p-shaft{border-radius:50%/8%;background:linear-gradient(to bottom,transparent,color-mix(in srgb,var(--c) 85%,transparent) 25%,#fff 50%,color-mix(in srgb,var(--c) 85%,transparent) 75%,transparent);filter:blur(1.5px);animation:pshaft 3.2s ease-in-out infinite}
@@ -2440,7 +2450,7 @@ async function studyDocx(d){
 /* header wiring */
 (function(){
  const mb=$('#musBtn'),sb=$('#sfxBtn'),v=$('#vol');
- const sw=(b,on)=>{b.classList.toggle('on',on);b.setAttribute('aria-pressed',on);b.querySelector('.st').textContent=on?'On':'Off'};const paint=()=>{sw(mb,musicOn);sw(sb,sound)};const vu=()=>{v.style.setProperty('--p',v.value+'%');[...document.querySelectorAll('#vu i')].forEach((e,i)=>e.classList.toggle('lit',i<Math.round(v.value/100*8)))};vu();
+ const sw=(b,on)=>{b.classList.toggle('on',on);b.setAttribute('aria-pressed',on);b.querySelector('.st').textContent=on?'On':'Off'};const paint=()=>{sw(mb,musicOn);sw(sb,sound)};window.__paintAudio=paint;const vu=()=>{v.style.setProperty('--p',v.value+'%');[...document.querySelectorAll('#vu i')].forEach((e,i)=>e.classList.toggle('lit',i<Math.round(v.value/100*8)))};vu();
  mb.onclick=()=>{musicOn=!musicOn;if(musicOn){try{Score.ctx()}catch(e){}Score.on=false;Score.mood=null;Score.play(curMood||'atlas')}else Score.stop();paint()};
  sb.onclick=()=>{sound=!sound;paint();if(sound)sfx.step()};
  v.oninput=()=>{setVol(v.value/100);vu()};
@@ -2470,7 +2480,7 @@ setInterval(()=>{if(calm||RM||cur!=='game'||!modal.hidden||document.hidden)retur
  try{if(navigator.audioSession)navigator.audioSession.type='playback'}catch(e){}
  const silent=new Audio('data:audio/wav;base64,UklGRrQBAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YZABAACAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA');silent.setAttribute('playsinline','');silent.preload='auto';
  const kick=()=>{try{silent.play().catch(()=>{})}catch(e){}try{const b=AC.createBuffer(1,1,22050),src=AC.createBufferSource();src.buffer=b;src.connect(AC.destination);src.start(0)}catch(e){}};
- const go=()=>{try{Score.ctx();kick();if(AC.state!=='running')AC.resume().then(after).catch(()=>{});else after()}catch(e){}};
+ const go=e=>{if(e&&e.target&&e.target.closest&&e.target.closest('[data-nosound]'))return;if(!musicOn&&!sound)return;try{Score.ctx();kick();if(AC.state!=='running')AC.resume().then(after).catch(()=>{});else after()}catch(e){}};
  const after=()=>{if(!AC||AC.state!=='running')return;if(!started){started=true;Score.on=false;Score.mood=null;music(curMood||'landing');const h=document.querySelector('.title .hint');if(h)h.textContent='Sound on · best with headphones'}
   EVTS.forEach(t=>document.removeEventListener(t,go,true))};
  EVTS.forEach(t=>document.addEventListener(t,go,true));
@@ -2591,6 +2601,18 @@ function catCard(){const at=save.attempts.cat||[],a=at[at.length-1];
  return a?`<div class="wstat ${a.dec==='pass'?'ok':'low'}" style="--lc:${a.dec==='pass'?'#5ff2c1':'#ffb36b'}"><div class="wst-row"><b class="wst-p">${a.dec==='pass'?'Above':a.dec==='fail'?'Below':'Incomplete'}</b><span class="wst-s">${(TRACKS[a.track]||TRACKS.RN).name} · ${a.n} questions · ability ${a.th}</span></div><div class="wst-row small"><span>Latest of ${at.length} attempt${at.length>1?'s':''}</span><span class="wst-t">Passing standard ${(TRACKS[a.track]||TRACKS.RN).pass.toFixed(2)}</span></div></div>`:`<div class="wstat empty"><span>No attempts yet</span><span class="wst-t">85–150 questions</span></div>`}
 
 renderTitle();
+/* Sound gate: browsers only allow sound after the visitor taps, clicks or presses a key.
+   This screen makes that first tap start the music at once; it is skipped when the browser already allows sound. */
+(function(){
+ const show=()=>{const g=document.createElement('div');g.className='sgate';g.id='soundGate';g.setAttribute('role','dialog');g.setAttribute('aria-modal','true');g.setAttribute('aria-labelledby','sgT');
+  g.innerHTML=`<div class="sg-in"><h2 id="sgT">Somnium Labyrinth</h2><p>Sound and music begin with your first tap. Headphones recommended.</p><button class="sg-go" type="button" id="sgGo">Tap to begin</button><button class="sg-quiet" type="button" data-nosound id="sgQuiet">Continue without sound</button></div>`;
+  document.body.appendChild(g);const done=()=>{g.classList.add('out');setTimeout(()=>g.remove(),650)};
+  g.querySelector('#sgGo').addEventListener('click',()=>{done()});
+  g.querySelector('#sgQuiet').addEventListener('click',()=>{musicOn=false;sound=false;try{Score.stop()}catch(e){}try{window.__paintAudio&&window.__paintAudio()}catch(e){}done()});
+  g.addEventListener('click',e=>{if(e.target===g)done()});
+  setTimeout(()=>{try{g.querySelector('#sgGo').focus({preventScroll:true})}catch(e){}},50)};
+ let allowed=false;try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();if(AC.state==='running')allowed=true;else AC.resume().then(()=>{allowed=AC.state==='running'}).catch(()=>{})}catch(e){}
+ setTimeout(()=>{if(allowed||(AC&&AC.state==='running')){try{Score.ctx();Score.on=false;Score.mood=null;music(curMood||'landing')}catch(e){}return}show()},250)})();
 </script>
 
 </body>
