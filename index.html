@@ -359,6 +359,7 @@ html.calm .hypno .hy-spin{animation:none}
 .sg-go{font-family:var(--f-mono);font-size:clamp(17px,2.8vw,21px);letter-spacing:.2em;text-transform:uppercase;color:#05040b;background:linear-gradient(90deg,#7ff0d0,#c9b3ff,#f3d58e);border:0;border-radius:999px;padding:18px 38px;cursor:pointer;box-shadow:0 0 0 1px rgba(255,255,255,.35),0 0 36px rgba(127,240,208,.45);animation:sgpulse 2.4s ease-in-out infinite}
 .sg-go:focus-visible{outline:3px solid #fff;outline-offset:4px}
 @keyframes sgpulse{0%,100%{box-shadow:0 0 0 1px rgba(255,255,255,.35),0 0 24px rgba(127,240,208,.35)}50%{box-shadow:0 0 0 1px rgba(255,255,255,.5),0 0 54px rgba(201,179,255,.7)}}
+.sg-lines span{display:block}
 .sg-quiet{font:inherit;font-size:16px;color:var(--mist,#c8c3e0);background:none;border:0;text-decoration:underline;text-underline-offset:4px;cursor:pointer;padding:8px}
 @media (prefers-reduced-motion:reduce){.sg-go{animation:none}}
 .runtime{display:flex;flex-wrap:wrap;gap:6px 22px;margin:0;font-family:var(--f-mono);font-size:15px;color:var(--mist)}.runtime b{color:#7ff0d0;font-weight:500;letter-spacing:.12em;text-transform:uppercase;font-size:12.5px;margin-right:6px}
@@ -2605,7 +2606,7 @@ renderTitle();
    This screen makes that first tap start the music at once; it is skipped when the browser already allows sound. */
 (function(){
  const show=()=>{const g=document.createElement('div');g.className='sgate';g.id='soundGate';g.setAttribute('role','dialog');g.setAttribute('aria-modal','true');g.setAttribute('aria-labelledby','sgT');
-  g.innerHTML=`<div class="sg-in"><h2 id="sgT">Somnium Labyrinth</h2><p>Sound and music begin with your first tap. Headphones recommended.</p><button class="sg-go" type="button" id="sgGo">Tap to begin</button><button class="sg-quiet" type="button" data-nosound id="sgQuiet">Continue without sound</button></div>`;
+  g.innerHTML=`<div class="sg-in"><h2 id="sgT">Somnium Labyrinth</h2><p class="sg-lines"><span>Sound and music begin with your first tap.</span><span>Headphones recommended.</span></p><button class="sg-go" type="button" id="sgGo">Tap to begin</button><button class="sg-quiet" type="button" data-nosound id="sgQuiet">Continue without sound</button></div>`;
   document.body.appendChild(g);const done=()=>{g.classList.add('out');setTimeout(()=>g.remove(),650)};
   g.querySelector('#sgGo').addEventListener('click',()=>{done()});
   g.querySelector('#sgQuiet').addEventListener('click',()=>{musicOn=false;sound=false;try{Score.stop()}catch(e){}try{window.__paintAudio&&window.__paintAudio()}catch(e){}done()});
